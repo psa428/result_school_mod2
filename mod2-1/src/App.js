@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import './getYear';
+import { getYear } from './getYear';
 
 function App() {
+	let currentYear = getYear();
   return (
     <div className="App">
       <header className="App-header">
@@ -16,8 +19,12 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+
         </a>
+			{currentYear}
+
       </header>
+
     </div>
   );
 }
