@@ -4,7 +4,7 @@ import './getYear';
 import { getYear } from './getYear';
 
 function App() {
-	let currentYear = getYear();
+	let currentYear = getYear();	// императивный. Все остальное - декларативный
   return (
     <div className="App">
       <header className="App-header">
