@@ -24,13 +24,14 @@ function App() {
 
   let  [inputStr, setInputStr] = useState('');
   let [expression, setExpression] = useState('');
+  let [chColor, setChColor] = useState(false);
 
   function clickDigital(val) {
     //  обработчик нажатия цифровой клавиши
-    console.log(`Нажата клавиша ${val}`);
     
     setInputStr(inputStr += String(val));
-
+    setExpression(expression +=String(val));
+    
    };
 
    function clickOper(val) {
@@ -39,19 +40,19 @@ function App() {
       case 'C':
         setInputStr('');
         setExpression('');
+        setChColor(false);
         break;
       case '=' :
-        console.log('Нажали кнопку <=>'); 
-        setExpression(expression += inputStr);
         setInputStr(eval(expression));
+        setExpression(eval(expression));
+        setChColor(true);      
+        
         break;
     default :    
-      console.log('Нажали кнопку <+>'); 
-      setExpression(expression += inputStr + val);
+      setExpression(expression += String(val));
       setInputStr('');
+      setChColor(false);
       break;
-
-
     };
   };
 
@@ -61,7 +62,7 @@ function App() {
       <div className="main-container" >
         
         <div className='display-container'>
-          <div className='display-result'>{inputStr}</div>
+          <div className={chColor ?'display-result': 'display'}>{inputStr}</div>
           <div className='display-calc'>{expression}</div>
         </div>
         <div className='keyboard-container'>

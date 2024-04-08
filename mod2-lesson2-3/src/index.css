@@ -74,6 +74,13 @@ code {
   border-width: 2px;  
 }
 
+.display {
+  font-size: 400%;
+  font-style: normal;
+  font-weight: bolder;
+  color: rgb(15, 14, 20) ;
+}
+
 .display-result {
   font-size: 400%;
   font-style: normal;
