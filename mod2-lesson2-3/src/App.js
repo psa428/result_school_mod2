@@ -4,33 +4,33 @@ import './index.css';
 
 function App() {
   const digitalButtons = [
-    {id: 1, val: 1},
-    {id: 2, val: 2},
-    {id: 3, val: 3},
-    {id: 4, val: 4},
-    {id: 5, val: 5},
-    {id: 6, val: 6},
-    {id: 7, val: 7},
-    {id: 8, val: 8},
-    {id: 9, val: 9},
-    {id: 10, val: 0}
+    { val: 1},
+    { val: 2},
+    { val: 3},
+    { val: 4},
+    { val: 5},
+    { val: 6},
+    { val: 7},
+    { val: 8},
+    { val: 9},
+    { val: 0}
   ];
   const operButtons = [
-    {id: 1, val: '+'},
-    {id: 2, val: '-'},
-    {id: 3, val: '='},
-    {id: 4, val: 'C'}
+    { val: '+'},
+    { val: '-'},
+    { val: '='},
+    { val: 'C'}
   ];
 
   let  [inputStr, setInputStr] = useState('');
   let [expression, setExpression] = useState('');
   let [chColor, setChColor] = useState(false);
 
-  function clickDigital(val) {
+  function clickDigital(idx) {
     //  обработчик нажатия цифровой клавиши
     
-    setInputStr(inputStr += String(val));
-    setExpression(expression +=String(val));
+    setInputStr(inputStr += digitalButtons[idx].val);
+    setExpression(expression += digitalButtons[idx].val);
     
    };
 
@@ -43,8 +43,8 @@ function App() {
         setChColor(false);
         break;
       case '=' :
-        setInputStr(eval(expression));
-        setExpression(eval(expression));
+        setInputStr(clcResult(expression));
+        setExpression(clcResult(expression));
         setChColor(true);      
         
         break;
@@ -55,6 +55,27 @@ function App() {
       break;
     };
   };
+
+    function clcResult(z){
+      // Вычисление результата
+      let x = [''];
+      
+      let y = z.split('');
+      let j = 0;
+      for (let i = 0; i < y.length; i++ ){
+        if (y[i] !== '+' && y[i] !== '-')
+          x[j] += y[i];
+        else {
+          j++;
+          x[j] = y[i];    
+        };
+          
+      };
+
+      return  x.reduce((sum, current) => sum + Number(current), 0);
+
+    };
+
 
   return (
     <div className="App">
@@ -68,7 +89,12 @@ function App() {
         <div className='keyboard-container'>
           <div className='digital-button-container'>
             {
-              digitalButtons.map((item, id) => {return <button className='button'  onClick={() => clickDigital(item.val)}>{item.val}</button>})
+              // digitalButtons.map((item, id) => {return <button className='button'  onClick={() => clickDigital(item.val)}>{item.val}</button>})
+              digitalButtons.map((item, idx) => (
+                <button key={idx} className='button' onClick={() => clickDigital(idx)}>
+                {item.val}
+                </button>
+                ))
             }
           </div>
           <div className='control-button-container'>
